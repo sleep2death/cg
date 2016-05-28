@@ -21,7 +21,8 @@
     "esnext": true,
     "env": ["node", "browser"],
     "space": true,
-    "semicolon": false
+    "semicolon": false,
+    "globals": ["Phaser"]
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
