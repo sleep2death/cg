@@ -15,14 +15,21 @@
   "author": "aspirin2d@outlook.com",
   "license": "ISC",
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "phaser": "^2.4.8"
   },
   "xo": {
     "esnext": true,
-    "env": ["node", "browser"],
+    "env": [
+      "node",
+      "browser"
+    ],
     "space": true,
     "semicolon": false,
-    "globals": ["Phaser"]
+    "globals": [
+      "Phaser",
+      "$"
+    ]
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
