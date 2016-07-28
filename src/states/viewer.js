@@ -9,7 +9,7 @@ export default class Viewer extends Phaser.State {
   create() {
     this.initHammer()
 
-    this.title.text = 'created'
+    this.title.text = ''
 
     this.createWeaponButtons()
 
@@ -23,6 +23,9 @@ export default class Viewer extends Phaser.State {
   // create weapon switch buttons
   createWeaponButtons() {
     this.weaponBtns = this.add.group()
+
+    this.btnBackground = this.make.graphics()
+    this.weaponBtns.addChild(this.btnBackground)
 
     this.weapons = [
       {name: 'sword', icon: 76},
@@ -43,7 +46,14 @@ export default class Viewer extends Phaser.State {
   }
 
   onWeaponClick(context) {
-    console.log(context.name)
+    this.btnBackground.clear()
+
+    this.btnBackground.lineStyle(1, 0xAAAAAA, 1)
+    this.btnBackground.beginFill(0x333333, 1)
+    this.btnBackground.drawRoundedRect(context.x, context.y, 34, 34, 4)
+    this.btnBackground.endFill()
+
+    this.currentWeapon = context.name
   }
 
   // create gesture input manager

@@ -20,7 +20,7 @@ export default class Menu extends Phaser.State {
 
   createMenuBtns() {
     this.btns = this.add.graphics()
-    this.btns.lineStyle(1, 0xCCFFCC, 1)
+    this.btns.lineStyle(1, 0xAAAAAA, 1)
 
     const menu = ['viewer', 'version control', 'system']
     for (let i = 0; i < menu.length; i++) {
