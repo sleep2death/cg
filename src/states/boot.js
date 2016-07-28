@@ -11,7 +11,7 @@ export default class Boot extends Phaser.State {
 
     $(window).resize(this.resize.bind(this))
     this.game.state.start('menu')
-    this.game.stage.backgroundColor = 0x7A7A7A
+    this.game.stage.backgroundColor = 0x3A3A3A
   }
 
   resize() {

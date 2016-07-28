@@ -9,22 +9,6 @@ export default class Menu extends Phaser.State {
     title.alpha = 0.6
 
     this.createMenuBtns()
-
-    // const g = this.add.graphics(0, 0, this.btnGroup)
-
-    // g.beginFill(0x333333)
-    // // g.lineStyle(1, 0xCCFFCC, 1)
-    // g.drawRoundedRect(0, 0, 100, 40, 4)
-    // g.endFill()
-
-    // g.width = 100
-    // g.height = 40
-
-    // this.btnGroup.x = (this.game.canvas.width - 100) * 0.5
-    // this.btnGroup.y = (this.game.canvas.height - 100) * 0.5
-
-    // console.log('on Resize', this.btns.height)
-
     this.game.scale.onSizeChange.add(this.onResizeCallback.bind(this))
   }
 
@@ -38,7 +22,7 @@ export default class Menu extends Phaser.State {
     this.btns = this.add.graphics()
     this.btns.lineStyle(1, 0xCCFFCC, 1)
 
-    const menu = ['character viewer', 'version control', 'system']
+    const menu = ['viewer', 'version control', 'system']
     for (let i = 0; i < menu.length; i++) {
       this.btns.drawRoundedRect(0, 60 * i, 200, 36, 4)
       const label = this.game.make.text(0, 60 * i, menu[i], {fill: '#FFF', fontSize: 12, boundsAlignH: 'center', boundsAlignV: 'middle'})
@@ -58,7 +42,7 @@ export default class Menu extends Phaser.State {
 
   nextState(target, pointer, index) {
     if (index === 0) {
-      this.game.state.start('character')
+      this.game.state.start('viewer')
     }
   }
 }
