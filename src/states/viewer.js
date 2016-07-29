@@ -1,4 +1,5 @@
 import Hammer from 'hammerjs'
+import Player from '../core/player'
 
 export default class Viewer extends Phaser.State {
   preload() {
@@ -11,13 +12,20 @@ export default class Viewer extends Phaser.State {
 
     this.title.text = ''
 
+    this.currentWeapon = 'sword'
+    this.currentMove = 'run'
+    this.currentCharacter = 'role_xiedi'
+
     this.createWeaponButtons()
 
     this.game.scale.onSizeChange.add(this.onResizeCallback, this)
     this.onResizeCallback()
+
+    this.player = new Player(this.game)
   }
 
   refresh() {
+    this.player.loadTexture(this.currentCharacter, this.currentWeapon, this.currentMove)
   }
 
   // create weapon switch buttons
@@ -27,19 +35,10 @@ export default class Viewer extends Phaser.State {
     this.btnBackground = this.make.graphics()
     this.weaponBtns.addChild(this.btnBackground)
 
-    this.weapons = [
-      {name: 'sword', icon: 76},
-      {name: 'spear', icon: 115},
-      {name: 'axe', icon: 141},
-      {name: 'bow', icon: 155},
-      {name: 'staff', icon: 134},
-      {name: 'fist', icon: 99}
-    ]
-
-    for (let i = 0; i < this.weapons.length; ++i) {
+    for (let i = 0; i < Player.weapons.length; ++i) {
       const btn = this.make.button(i * 50, 10, 'icons', this.onWeaponClick, this)
-      btn.frame = this.weapons[i].icon
-      btn.name = this.weapons[i].name
+      btn.frame = Player.weapons[i].icon
+      btn.name = Player.weapons[i].name
 
       this.weaponBtns.add(btn)
     }
@@ -54,6 +53,7 @@ export default class Viewer extends Phaser.State {
     this.btnBackground.endFill()
 
     this.currentWeapon = context.name
+    this.refresh()
   }
 
   // create gesture input manager
