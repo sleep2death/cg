@@ -25,11 +25,19 @@
       "node",
       "browser"
     ],
+    "rules": {
+      "curly": 0,
+      "keyword-spacing": 0,
+      "guard-for-in": 0
+    },
     "space": true,
     "semicolon": false,
     "globals": [
       "Phaser",
       "$"
+    ],
+    "ignores": [
+      "static/filters/pixi/*.js"
     ]
   },
   "devDependencies": {

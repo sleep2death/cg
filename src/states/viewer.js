@@ -13,15 +13,19 @@ export default class Viewer extends Phaser.State {
     this.title.text = ''
 
     this.currentWeapon = 'sword'
-    this.currentMove = 'run'
-    this.currentCharacter = 'role_xiedi'
+    this.currentMove = 'attack'
+    this.currentCharacter = 'feite'
 
     this.createWeaponButtons()
 
+    this.player = new Player(this.game)
+
     this.game.scale.onSizeChange.add(this.onResizeCallback, this)
     this.onResizeCallback()
+  }
 
-    this.player = new Player(this.game)
+  update() {
+    this.player.update()
   }
 
   refresh() {
@@ -37,6 +41,7 @@ export default class Viewer extends Phaser.State {
 
     for (let i = 0; i < Player.weapons.length; ++i) {
       const btn = this.make.button(i * 50, 10, 'icons', this.onWeaponClick, this)
+
       btn.frame = Player.weapons[i].icon
       btn.name = Player.weapons[i].name
 
@@ -64,16 +69,17 @@ export default class Viewer extends Phaser.State {
     mc.get('swipe').set({direction: Hammer.DIRECTION_ALL})
     mc.on('swipeleft', () => {
       // this.dirIndex = this.dirIndex < this.animationDirections.length - 1 ? this.dirIndex + 1 : 0
-      this.refresh()
+      this.player.nextDir(1)
     })
 
     mc.on('swiperight', () => {
       // this.dirIndex = this.dirIndex > 0 ? this.dirIndex - 1 : this.animationDirections.length - 1
-      this.refresh()
+      this.player.nextDir(-1)
     })
   }
 
   onResizeCallback() {
     this.weaponBtns.x = (this.game.width - this.weaponBtns.width) * 0.5
+    this.player.setPos(this.game.width * 0.5, this.game.height * 0.5)
   }
 }
